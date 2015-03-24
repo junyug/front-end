@@ -1,8 +1,8 @@
-(function () {
+(function (window) {
   'use strict'
   var EventUtil = {
     addEventListener: function (ele, type, handler) {
-      if (ele.addEventListner) {
+      if (ele.addEventListener) {
         ele.addEventListener(type, handler, false);
       } else {
         ele.attachEvent('on' + type, handler);
@@ -35,5 +35,6 @@
         event.cancelBubble = true;
       }
     }
-  }
-})();
+  };
+  window.EventUtil = EventUtil;
+})(window);
