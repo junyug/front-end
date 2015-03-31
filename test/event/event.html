@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>事件监听处理函数测试用例</title>
+    <meta charset="utf-8">
+    <script src="../src/evnet.js"></script>
+  </head>
+  <body>
+      <div id="box">
+        <button id="btn1">按钮一</button>
+        <button id="btn2">按钮二</button>
+        <a id="goto" href="http://www.baidu.com">连接</a>
+      </div>
+  </body>
+</html>
+<script>
+window.onload = function () {
+  var btn1 = document.getElementById('btn1'),
+      btn2 = document.getElementById('btn2'),
+      box = document.getElementById('box'),
+      goto = document.getElementById('goto');
+  EventUtil.addEventListener(btn1, 'click', handler);
+  EventUtil.removeEventListener(btn1, 'click', handler);
+ 
+  function handler() {
+    console.log('事件监听正常');
+  }
+}
+</script>
