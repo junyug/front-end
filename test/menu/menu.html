@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>删除菜单</title>
+    <style rel="stylesheet">
+        @import url('http://cdn.gbtags.com/font-awesome/4.1.0/css/font-awesome.min.css');
+        body{
+          background:#666;
+          color: #fff;  
+          font-family: 'microsoft yahei',Arial,sans-serif;
+        }
+         
+        ul{
+          list-style:none;
+          margin: 0;
+          padding: 0;
+          position: relative;
+        }
+         
+        li{
+          padding: 10px;
+          margin: 2px;
+          border: 1px solid #888;
+          cursor: pointer;
+          position: relative;
+        }
+        .fa:hover{
+          -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+          -webkit-transition: .7s;
+          -o-transition: .7s;
+          transition: 0.7s;
+        }
+    </style>
+    <script type="text/javascript" src="http://cdn.gbtags.com/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      (function ($) {
+        var Menu = {
+            ele: "",
+            btnClose: "",
+            itemTpl: '<li class="more">更多语言<i class="fa fa-times pull-right"></i></button></li>',
+            addItem: function () {
+                $(this.itemTpl).prependTo(this.ele).hide().slideDown(180,'linear');
+            },
+            removeItem: function (e) {
+                var target = e.target || window.event.srcElement;
+                var $li = $(target).parents('li'),
+                    width = $li.outerWidth();
+                $li.stop(true,true).animate({
+                    left: -width,
+                    opacity: 0
+                  },
+                  500, function() {
+                    $li.remove();
+                });
+                e.stopPropagation();
+            },
+            eventListener: function () {
+                $(document).on("click", $.proxy(this.addItem,Menu));
+                this.ele.on("click",this.btnClose, $.proxy(this.removeItem,Menu));
+            },
+            init: function () {
+                this.ele = $("#container");
+                this.btnClose = $(".fa");
+                this.eventListener();
+            }
+        };
+        $(function () {
+          Menu.init();
+        })
+      })(jQuery)
+    </script>
+</head>
+<body>
+    <ul id="container">
+      <li>Java<i class="fa fa-times pull-right"></i></li>
+      <li>Javascript<i class="fa fa-times pull-right"></i></li>
+      <li>HTML<i class="fa fa-times pull-right"></i></li>
+      <li>CSS<i class="fa fa-times pull-right"></i></li>
+      <li>PHP<i class="fa fa-times pull-right"></i></li>
+    </ul>
+</body>
+</html>
